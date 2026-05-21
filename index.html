@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#0a0a0f" />
+<title>Bogotá · May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-soft: #16161f;
+    --bg-card: #1c1c28;
+    --bg-elev: #25253a;
+    --ink: #f5f3ed;
+    --ink-soft: #b5b1a3;
+    --ink-faint: #6b6754;
+
+    --gold: #fcd116;
+    --emerald: #14b377;
+    --emerald-deep: #0a7d5b;
+    --coral: #ff5e3a;
+    --magenta: #ec407a;
+    --sky: #4dd0e1;
+    --indigo: #7c5cff;
+
+    --fri: #ff8a5b;     /* coral-orange */
+    --sat: #14b377;     /* emerald */
+    --sun: #ec407a;     /* magenta-rose */
+    --mon: #7c5cff;     /* indigo */
+    --tue: #4dd0e1;     /* sky */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { overflow-x: hidden; }
+  body {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom);
+    /* Ambient gradient mesh — modern dark */
+    background-image:
+      radial-gradient(ellipse 1200px 800px at 20% 10%, rgba(236,64,122,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 1000px 700px at 80% 40%, rgba(20,179,119,0.10) 0%, transparent 50%),
+      radial-gradient(ellipse 900px 600px at 50% 90%, rgba(124,92,255,0.10) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  /* subtle film grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.4; pointer-events: none; z-index: 100;
+  }
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: calc(env(safe-area-inset-top) + 36px) 22px 64px;
+    overflow: hidden;
+  }
+  /* flag stripe at top */
+  .flag {
+    position: absolute; top: env(safe-area-inset-top); left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right,
+      var(--gold) 0% 33.33%,
+      #0033a0 33.33% 66.66%,
+      #ce1126 66.66% 100%);
+    z-index: 3;
+  }
+  /* aurora glow behind title */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%;
+    width: 70%; height: 90%;
+    background: radial-gradient(circle, var(--magenta) 0%, transparent 65%);
+    filter: blur(80px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -10%; right: -15%;
+    width: 70%; height: 80%;
+    background: radial-gradient(circle, var(--emerald) 0%, transparent 65%);
+    filter: blur(80px);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: rgba(245,243,237,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(245,243,237,0.15);
+    color: var(--ink);
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--emerald);
+    box-shadow: 0 0 8px var(--emerald);
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(96px, 24vw, 220px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  h1 .accent {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--coral) 50%, var(--magenta) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .hero-tag {
+    font-size: clamp(16px, 4vw, 22px);
+    color: var(--ink-soft);
+    margin-top: 18px;
+    font-weight: 400;
+    max-width: 560px;
+    line-height: 1.35;
+  }
+  .hero-tag em {
+    color: var(--ink);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.15em;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(245,243,237,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(245,243,237,0.12);
+    color: var(--ink);
+    transition: transform 0.15s, background 0.15s;
+  }
+  .chip:active { transform: scale(0.96); background: rgba(245,243,237,0.12); }
+  .chip-glow {
+    background: linear-gradient(135deg, rgba(20,179,119,0.2), rgba(20,179,119,0.05));
+    border-color: rgba(20,179,119,0.3);
+  }
+  .hero-party {
+    margin-top: 16px;
+    color: var(--ink-faint);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* ============ CONTAINER ============ */
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8px 18px 100px;
+  }
+
+  /* ============ TOGGLE BUTTON ============ */
+  .toggle-wrap { margin-bottom: 28px; }
+  .toggle-btn {
+    width: 100%;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, var(--magenta) 0%, var(--coral) 100%);
+    color: var(--ink);
+    border-radius: 16px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1) inset,
+      0 8px 24px -8px rgba(236,64,122,0.5);
+  }
+  .toggle-btn:active { transform: scale(0.98); }
+  .toggle-btn.checklist-mode {
+    background: linear-gradient(135deg, var(--emerald) 0%, var(--sky) 100%);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1) inset,
+      0 8px 24px -8px rgba(20,179,119,0.5);
+  }
+
+  /* ============ DAY TABS ============ */
+  .day-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 4px 12px;
+    margin-left: -4px;
+    margin-right: -4px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .day-tabs::-webkit-scrollbar { display: none; }
+
+  .day-tab {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    color: var(--ink-soft);
+    border: 1px solid rgba(245,243,237,0.08);
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    min-width: 84px;
+    text-align: center;
+    line-height: 1.2;
+    font-family: 'Geist Mono', monospace;
+  }
+  .day-tab .num {
+    display: block;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 24px;
+    margin-top: 2px;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .day-tab.active {
+    color: var(--ink);
+    box-shadow: 0 0 0 1px currentColor;
+  }
+  .day-tab.active .num { color: inherit; }
+
+  /* ============ DAY HEADER ============ */
+  .day-header {
+    padding: 32px 26px 36px;
+    border-radius: 24px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    color: var(--ink);
+    background: var(--bg-card);
+    border: 1px solid rgba(245,243,237,0.08);
+  }
+  .day-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--day-color);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .day-header::after {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--day-color);
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .day-bignum {
+    position: absolute; top: -10px; right: 12px;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 200px;
+    color: var(--ink);
+    line-height: 1;
+    user-select: none;
+    z-index: 1;
+    opacity: 0.07;
+  }
+  .day-header-content { position: relative; z-index: 2; }
+  .day-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--day-color);
+    text-transform: uppercase;
+  }
+  .day-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(56px, 14vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .day-theme {
+    font-size: clamp(15px, 3.8vw, 18px);
+    margin-top: 10px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  /* ============ ALTITUDE NOTE ============ */
+  .altitude {
+    background: var(--bg-card);
+    color: var(--ink);
+    padding: 16px 20px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-weight: 500;
+    border: 1px solid rgba(252,209,22,0.25);
+    line-height: 1.45;
+  }
+  .altitude-icon {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--gold), var(--coral));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-size: 16px;
+  }
+
+  /* ============ EVENT CARDS ============ */
+  .events { display: flex; flex-direction: column; gap: 16px; }
+
+  .event {
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(245,243,237,0.08);
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .event:active { transform: scale(0.99); }
+
+  .event-img {
+    position: relative;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-elev);
+  }
+  .event-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,10,15,0.3) 0%,
+      transparent 30%,
+      transparent 60%,
+      rgba(10,10,15,0.85) 100%);
+  }
+  .event-time-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: rgba(10,10,15,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: var(--ink);
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(245,243,237,0.15);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .event-type-badge {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(10,10,15,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: var(--ink);
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(245,243,237,0.15);
+    z-index: 2;
+  }
+
+  .event-body { padding: 20px 22px 22px; }
+  .event-name {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .event-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .event-line .icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+  .event-link {
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+  .event-link:active { opacity: 0.6; }
+
+  .reservation-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-top: 16px;
+    margin-bottom: 2px;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+  .reservation-btn:active { transform: scale(0.96); }
+  .reservation-btn.wa {
+    background: #25D366;
+    color: #0a0a0f;
+  }
+  .reservation-btn.web {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .reservation-btn .arrow { font-size: 14px; }
+
+  .event-notes {
+    margin-top: 16px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    background: rgba(245,243,237,0.03);
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-left: 3px solid var(--day-color);
+  }
+  .event-who {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(245,243,237,0.06);
+    font-size: 11px;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: 'Geist Mono', monospace;
+  }
+
+  /* ============ RESERVATIONS ============ */
+  .res-hero {
+    padding: 40px 26px 44px;
+    border-radius: 24px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid rgba(245,243,237,0.08);
+  }
+  .res-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, var(--coral) 0%, transparent 60%);
+    opacity: 0.4;
+    filter: blur(60px);
+  }
+  .res-hero-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--coral);
+    font-weight: 500;
+    margin-bottom: 10px;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .res-hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(48px, 12vw, 84px);
+    color: var(--ink);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .res-hero-title .accent {
+    background: linear-gradient(135deg, var(--gold), var(--coral));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .priority-section { margin-bottom: 28px; }
+  .priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    border: 1px solid currentColor;
+  }
+
+  .res-card {
+    background: var(--bg-card);
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(245,243,237,0.08);
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .res-card:active { transform: scale(0.99); }
+  .res-card.done {
+    background: rgba(20,179,119,0.08);
+    border-color: rgba(20,179,119,0.25);
+    opacity: 0.7;
+  }
+  .res-check {
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    border: 1.5px solid var(--ink-faint);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.15s;
+  }
+  .res-card.done .res-check {
+    background: var(--emerald);
+    border-color: var(--emerald);
+    color: var(--bg);
+  }
+  .res-info { flex: 1; min-width: 0; }
+  .res-name {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 5px;
+    word-break: break-word;
+  }
+  .res-card.done .res-name { text-decoration: line-through; }
+  .res-when {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  .res-phone {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .res-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .res-link.wa { background: #25D366; color: #0a0a0f; }
+  .res-link.web { background: var(--ink); color: var(--bg); }
+
+  .warning-box {
+    margin-top: 24px;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, rgba(252,209,22,0.1), rgba(255,94,58,0.1));
+    border-radius: 16px;
+    border: 1px solid rgba(252,209,22,0.25);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .warning-box strong {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 20px 0;
+    text-align: center;
+  }
+  .footer-bye {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(40px, 10vw, 56px);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--coral) 50%, var(--magenta) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .footer-meta {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    margin-top: 18px;
+    font-weight: 500;
+  }
+  .footer-flag {
+    display: inline-flex;
+    gap: 0;
+    margin-top: 14px;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .footer-flag span {
+    display: block;
+    width: 16px;
+    height: 100%;
+  }
+
+  .hidden { display: none; }
+
+  @supports (padding: max(0px)) {
+    .wrap {
+      padding-left: max(18px, env(safe-area-inset-left));
+      padding-right: max(18px, env(safe-area-inset-right));
+    }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .event { animation: slideIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .event:nth-child(1) { animation-delay: 0.04s; }
+  .event:nth-child(2) { animation-delay: 0.10s; }
+  .event:nth-child(3) { animation-delay: 0.16s; }
+  .event:nth-child(4) { animation-delay: 0.22s; }
+  .event:nth-child(5) { animation-delay: 0.28s; }
+  .event:nth-child(6) { animation-delay: 0.34s; }
+  .day-header { animation: slideIn 0.4s ease-out both; }
+
+  @media (min-width: 720px) {
+    .events { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .event-img { height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="flag"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Family Trip · Bogotá 2026</div>
+    <h1>Bogo<span class="accent">tá</span></h1>
+    <p class="hero-tag">Six travelers. Five days. <em>One unforgettable city.</em></p>
+    <div class="hero-meta">
+      <div class="chip">📅 May 21 – 26, 2026</div>
+      <div class="chip chip-glow">📍 Parque de la 93</div>
+      <div class="chip">👥 6 viajeros</div>
+    </div>
+    <div class="hero-party">Couple · Two kids (9 & 11) · Nephew (30) · Grandmother (74)</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toggle-wrap">
+    <button id="toggleBtn" class="toggle-btn" onclick="toggleView()">
+      <span id="toggleIcon">☎</span>
+      <span id="toggleLabel">Reservations Checklist</span>
+    </button>
+  </div>
+
+  <div id="itineraryView">
+    <div class="day-tabs" id="dayTabs"></div>
+    <div id="dayContent"></div>
+  </div>
+
+  <div id="reservationsView" class="hidden">
+    <div class="res-hero">
+      <div class="res-hero-eyebrow">Call · WhatsApp · Book</div>
+      <div class="res-hero-title">Reserva<span class="accent">ciones</span></div>
+    </div>
+    <div id="resList"></div>
+    <div class="warning-box">
+      <strong>⏰ Watch the times</strong>
+      Storia D'Amore closes 9 PM Monday. Andrés Chía Sunday closes 10 PM (closed Monday entirely). La Granja Tenjo closes 6 PM Sunday. Book everything ahead — these places fill up.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-bye">¡Buen viaje!</div>
+    <div class="footer-meta">BOGOTÁ · MAY 2026</div>
+    <br/>
+    <div class="footer-flag">
+      <span style="background:var(--gold)"></span>
+      <span style="background:#0033a0"></span>
+      <span style="background:#ce1126"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+// Unique images per event — contextually matched
+const IMAGES = {
+  // Friday
+  rappi: "https://lh3.googleusercontent.com/place-photos/AJRVUZP2JZBgDwdqphPmxMlX8-VPtam9b3IxacSnc6EiRuZKX4im5pDV8dK0hyDclmXbep6fF7RwqVI6qsGIE0k46Q5huxZtpMGhTzb2Ksvs4f0w86g8fUhKMl8yVwhJVX6MzfIXZgznABl07t73Uac=s4800-w800-h600",
+  emerald: "https://lh3.googleusercontent.com/place-photos/AJRVUZPCaUfqFOjKYNbW4Hp1kWLhdV7ly4y4e6Z9eV2boghNchBzN_b9ekzb7xKJb3bfUuxVwG1iRMMvtWyVj-ynNpCWsgbeay6WTO-G8EvFohgLkCGkQYTh5IMqoG1a_1jX-7BcPzwdpA6yu_XmGoc=s4800-w800-h600",
+  wok: "https://lh3.googleusercontent.com/place-photos/AJRVUZNMrlp_GAz1qNWm_NanOnQmq_yzydku66-QwRS8pYcw0f4lKks6QEoTgK7saQ4Ld2ebn5muqldVPT93lyZEnOanvns1VG_Lq5XrPsam-FNXemk2oN_tf-hoyggLffEY1MUKPoaK_Ql38B1zpVM=s4800-w800-h600",
+  cuzco: "https://lh3.googleusercontent.com/place-photos/AJRVUZPkRunWCuKnPc2Iyby_CBD5OP107sz7WiWPZx4IhHY7DhVYnb7T2YxgiHgUuoo6uyHTPofrjer4JmpuT_1mm2jf4ISRw17VZJHQqiQbYMlfvi9U4kCwEB1uMbPb8dN_Xjr92DDfwTlAj-lcNkuu-iE1yA=s4800-w800-h600",
+  // Saturday
+  hornitos: "https://lh3.googleusercontent.com/places/ANXAkqHuL4aZhEfCsRgXZaoZtliniVIuWI9LjYUzcbMkIurl7mU9O848aDDasUaBOMbbtZ-b-z6V4UX0o7qMOn0jUq-IubXrdnuP3e8=s4800-w800-h600",
+  airbnbRest: "https://lh3.googleusercontent.com/place-photos/AJRVUZP2JZBgDwdqphPmxMlX8-VPtam9b3IxacSnc6EiRuZKX4im5pDV8dK0hyDclmXbep6fF7RwqVI6qsGIE0k46Q5huxZtpMGhTzb2Ksvs4f0w86g8fUhKMl8yVwhJVX6MzfIXZgznABl07t73Uac=s4800-w800-h600",
+  brasserie: "https://lh3.googleusercontent.com/place-photos/AJRVUZMalpFSH9NI-K2TXVC7IzRzB0tfBfV8yaVjODcvyxnq59VA9mY2desEK5amk6Yy4PPi2EFAVUdhFxvlqJY_Gz5M-cBsF01wEEOubXYnBUrRt4hR8EL6BICzf_lwZ60l10TxjzxV5xvxrjQoecLDhUGF=s4800-w800-h600",
+  andino: "https://lh3.googleusercontent.com/places/ANXAkqGfyJjkkD5p4_oxJBkH50YKj1HxIyXEC7XlOMfsxAFE2tnHfeq6Yt6JR-tmgKp0eN9Vz0COR9hUw1OdRDXOWUOiXyZ5l9XSlCs=s4800-w800-h600",
+  osaka: "https://lh3.googleusercontent.com/places/ANXAkqG9mcikocwxfEmzpzGSZQ8TPCh2gmCLKci2qxfDXfAdHCg4DTJXG6j36jSjtJ0_lG79EvaxxHGk-AhLWKiYO1M_OiRc-JvRVvw=s4800-w800-h600",
+  cumbia: "https://lh3.googleusercontent.com/places/ANXAkqGIxsgsIdCoIOsDlMX9BHV2xMQyseWE3C7gS3pvckSjAXMwuu2ij3Xm5nQi-rsPXjpPUTFrTL7ybv7SJ3KwTVOnKjF4wB9py2E=s4800-w800-h600",
+  // Sunday
+  granja: "https://lh3.googleusercontent.com/places/ANXAkqHKlMmmu1kgM7uOIVDDjY3GjFqlYwAYjsmyU5_5hQOyfH3yvz9_S8eVMR2qFbRzL8fhwOLAoxoTzgwUvyN_qf9I7XRWPbWzWek=s4800-w800-h600",
+  andres: "https://lh3.googleusercontent.com/places/ANXAkqFj0NfxArNM0nyU8IRO1FOvtYMTx1jriQlv5WMepB1dvfTkpubNPlg7ZOAzuNR30ZpjJKJSG6uOjRxtVUyQJF6-Yolo9FGMl3A=s4800-w720-h600",
+  // Monday
+  wuin: "https://lh3.googleusercontent.com/place-photos/AJRVUZNpR79-JGkRILz6wlGePCukLOkFwRAk1fZhhAJRC5LPRUyMzD6ycUeZcYGqD-dxK-ObLrs6HWCiOH2UuN0RGGOR8sEMt5zkgC9PGSmzVwka0QqXZsOdx7EdBNxLCe5vEvjXVF0RbZPBPx1Ynw=s4800-w800-h600",
+  // Cuzco Monday reuses same image since it's same restaurant
+  monserrate: "https://lh3.googleusercontent.com/place-photos/AJRVUZMMUpJTO6NEDXhoJc4v3QxRLk6jo4VruyOEfFrL92rFv1AMGHz6x7rlzyB9rz9lSDLEx6oqvE6TCchOo6EZ11A4QQ0qsU5iwf7D9OZloNvdeD7m22UXSZcCP-qaG9XZuCade-6lDRiXVMjbUZM=s4800-w800-h600",
+  storia: "https://lh3.googleusercontent.com/places/ANXAkqEGiFHDA_zUf8qGz8NvcOCkAjMinlXLTlRznB1G0yPCffyL0jCAORMsvhM9tZ0Ls3Kav9WOWxhttGLpEJ9zC29F-s50UQqXwZI=s4800-w800-h600",
+  // Tuesday
+  airport: "https://lh3.googleusercontent.com/place-photos/AJRVUZNmReAp3iQghOKdFEOCYusuaKADvAp-OwMsLbebm9aMq7pJ_4mfEtx3dYyK9d7NomvRaGxZKIOHxk1vXhd6IWMmxEwAY2kmlowtDmeTkiat83c1qaZHcEAFSTRatrPoavv_Hnm8yoxtDs1Hucw=s4800-w800-h600"
+};
+
+const data = {
+  days: [
+    {
+      id: 'fri', date: 'Friday', dateNum: 'May 22', dateShort: '22',
+      theme: 'Easy Arrival · Settle In', color: '#ff8a5b',
+      altitude: 'Day 1 — no alcohol until evening, drink water, eat light. 2,640m / 8,660 ft.',
+      events: [
+        { time:'8:00 AM', title:'Rappi Breakfast', type:'In · Airbnb', image:IMAGES.rappi,
+          location:'Airbnb · Parque de la 93',
+          website:'rappi.com.co', reservation:{label:'Open Rappi', url:'https://www.rappi.com.co', type:'web'},
+          notes:'Order via Rappi to the Airbnb. Good options near Parque 93: Hornitos, Masa, Cafe San Alberto, OMA. Order the night before or right when you wake up — ~30 min delivery.',
+          who:'All 6' },
+        { time:'9:00 AM', title:'Emerald Trade Center', type:'Shopping', image:IMAGES.emerald,
+          location:'Av. Jiménez · Uber ~25 min',
+          website:'emeraldtradecenter.com',
+          notes:'You + wife + nephew leave from Airbnb. Kids and grandma stay home. Opens 8 AM Friday — light foot traffic in the morning. Upper floors for smaller artisans, better deals. Bring cash. Done by 12 PM to make WOK at 1 PM.',
+          who:'Adults: you, wife, nephew · Kids + grandma stay at Airbnb' },
+        { time:'1:00 PM', title:'WOK Usaquén + Stroll', type:'Lunch & walk', image:IMAGES.wok,
+          location:'Cra. 6a #117-02 · Uber ~10 min',
+          phone:'+57 601 580 7272', website:'wok.com.co',
+          reservation:{label:'Reserve online', url:'https://www.wok.com.co', type:'web'},
+          notes:'Family reunites at WOK. Lunch first, then walk Usaquén\'s cobblestones, boutiques, Hacienda Santa Bárbara mall. Friday afternoon is calm — perfect for grandma. Back by 5 PM.',
+          who:'All 6' },
+        { time:'7:30 PM', title:'Cuzco Restaurante', type:'Dinner', image:IMAGES.cuzco,
+          location:'Parque de la 93 · 2 min walk',
+          phone:'+57 316 350 0774', website:'restaurantecuzco.com',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/573163500774', type:'wa'},
+          notes:'RESERVE for 7:30 PM. Right on Parque 93. Solomito chocolade is the move. Walk home and crash.',
+          who:'All 6' }
+      ]
+    },
+    {
+      id: 'sat', date: 'Saturday', dateNum: 'May 23', dateShort: '23',
+      theme: 'Zona T & Cumbia House', color: '#14b377',
+      events: [
+        { time:'8:00 AM', title:'Hornitos Chicó', type:'Breakfast', image:IMAGES.hornitos,
+          location:'Cra. 11 #98-07 · 6 blocks walk',
+          phone:'+57 601 756 1515', website:'hornitos.co',
+          notes:'Walk over. Calentado, huevos pericos, fresh juices. Open from 6:30 AM. Back to Airbnb after to chill until lunch.',
+          who:'All 6' },
+        { time:'9:30 AM', title:'Free Morning', type:'Rest · Airbnb', image:IMAGES.airbnbRest,
+          location:'Airbnb · Parque de la 93',
+          notes:'Lazy morning at the Airbnb. Recovery time for everyone — long day ahead with Zona T, Osaka, and Cumbia House. Kids can rest, grandma can nap, adults can read or walk around Parque 93.',
+          who:'All 6' },
+        { time:'1:30 PM', title:'La Brasserie', type:'Lunch', image:IMAGES.brasserie,
+          location:'Cra. 13 #85-35 · Zona T',
+          phone:'+57 313 889 4213', website:'labrasserierestaurante.com',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/573138894213', type:'wa'},
+          notes:'Family lunch in Zona T. Steak, the olive bread, the works. Wrap by 3:30 PM.',
+          who:'All 6' },
+        { time:'3:30 PM', title:'Centro Andino + Zona T', type:'Shopping & stroll', image:IMAGES.andino,
+          location:'Cra. 11 #82-71 · 3 min walk',
+          website:'centroandino.com.co',
+          notes:'Andino, Atlantis, El Retiro malls all connected. Open Saturday until 9 PM. Walk the open-air pedestrian streets of Zona T. Grandma can rest at any mall café.',
+          who:'All 6' },
+        { time:'7:00 PM', title:'Osaka Bogotá', type:'Dinner', image:IMAGES.osaka,
+          location:'Cra. 13 #85-25 · next to La Brasserie',
+          phone:'+57 322 681 8282', website:'osakanikkei.com',
+          reservation:{label:'Reserve online', url:'https://www.osakanikkei.com', type:'web'},
+          notes:'Light dinner: tiraditos, share rolls. Don\'t go heavy — Cumbia House right after for the adults. Kids and grandma Uber home around 9 PM.',
+          who:'All 6' },
+        { time:'10:00 PM', title:'Gaira Café Cumbia House', type:'Adults Only · Show', image:IMAGES.cumbia,
+          location:'Cra. 13 #96-11 · 4 blocks walk',
+          phone:'+57 601 508 8383', website:'cumbiahouse.com',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/576015088383', type:'wa'},
+          notes:'ADULTS ONLY — kids stay at Airbnb. Carlos Vives\' venue. Reserve well ahead for 4, request table near stage. Open until 3 AM Saturday. Drinks + show only — you ate at Osaka. Walk home after.',
+          who:'🔞 Adults only: you, wife, nephew, grandma' }
+      ]
+    },
+    {
+      id: 'sun', date: 'Sunday', dateNum: 'May 24', dateShort: '24',
+      theme: 'Country Day · La Granja & Andrés', color: '#ec407a',
+      altitude: 'Tenjo is ~2,580m — comfortable altitude. Sunscreen and a light jacket for La Granja (open-air country setting).',
+      events: [
+        { time:'10:00 AM', title:'La Granja Tenjo', type:'Farm restaurant · 5 hr', image:IMAGES.granja,
+          location:'Km 12 Vía Siberia Tenjo · ~45 min',
+          phone:'+57 323 292 6880', website:'restaurantelagranja.co',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/573232926880', type:'wa'},
+          notes:'Private driver out. 4.7 ★ · 13,413 reviews. Working farm with gardens, sculptures, pet zoo, playgrounds, small circus show. Walk first, then lunch ~12:30 PM. Catch the afternoon show. Leave by 3 PM. RESERVE — Sundays pack out.',
+          who:'All 6' },
+        { time:'5:30 PM', title:'Andrés Carne de Res Chía', type:'Dinner & spectacle', image:IMAGES.andres,
+          location:'Chía · ~25 min from Tenjo',
+          phone:'+57 601 589 3880', website:'andrescarnederes.com',
+          reservation:{label:'Reserve online', url:'https://andrescarnederes.com', type:'web'},
+          notes:'Same private driver continues to Chía. Sunday open 8 AM – 10 PM (closed Monday). Arrive early evening for family-friendly energy — by 9 PM it shifts to nightclub. Lomo al trapo + refajo. LEAVE BY 9–10 PM.',
+          who:'All 6' }
+      ]
+    },
+    {
+      id: 'mon', date: 'Monday', dateNum: 'May 25', dateShort: '25',
+      theme: 'Spa · Mountain · Pasta', color: '#7c5cff',
+      altitude: 'Monserrate is 3,152m — much colder than the city. Bring jackets even if it\'s sunny in Bogotá.',
+      events: [
+        { time:'10:00 AM', title:'Wuin Spa Chicó', type:'Spa · 90 min', image:IMAGES.wuin,
+          location:'Cl. 95 #11A-44 · 5-min walk',
+          phone:'+57 311 432 5910', website:'wuinspa.com',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/573114325910', type:'wa'},
+          notes:'WhatsApp ahead. Group block for 4–5 people. Confirm kids\' policy (9 & 11) when booking. 4.9 ★ · 1,929 reviews · 17 years in business.',
+          who:'Adults + possibly kids (confirm policy)' },
+        { time:'12:30 PM', title:'Cuzco Restaurante', type:'Lunch · Round 2', image:IMAGES.cuzco,
+          location:'Parque de la 93 · 2 min walk',
+          phone:'+57 316 350 0774', website:'restaurantecuzco.com',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/573163500774', type:'wa'},
+          notes:'Right on Parque 93. Try something new this time. Wrap by 2:30 PM.',
+          who:'All 6' },
+        { time:'3:30 PM', title:'Monserrate', type:'Cable car & funicular', image:IMAGES.monserrate,
+          location:'Cerro de Monserrate · ~25 min Uber',
+          phone:'+57 601 284 5700', website:'monserrate.co',
+          reservation:{label:'Buy tickets online', url:'https://www.monserrate.co', type:'web'},
+          notes:'BUY TICKETS ONLINE to skip lines. Open Mon until 10 PM. Funicular up (more fun for kids), cable car down (better views). ~2.5–3 hours.',
+          who:'All 6' },
+        { time:'7:30 PM', title:'Storia D\'Amore', type:'Farewell dinner', image:IMAGES.storia,
+          location:'Cra. 13 #82-36 · Zona T',
+          phone:'+57 310 762 0025', website:'restaurantestoriadamore.com',
+          reservation:{label:'WhatsApp to book', url:'https://wa.me/573107620025', type:'wa'},
+          notes:'CLOSES 9 PM MONDAY — don\'t be late. Reserve for 7:30 PM. Pizza, pasta to share. Quick dinner, then Uber home to pack.',
+          who:'All 6' }
+      ]
+    },
+    {
+      id: 'tue', date: 'Tuesday', dateNum: 'May 26', dateShort: '26',
+      theme: 'Departure', color: '#4dd0e1',
+      events: [
+        { time:'Morning', title:'Flight home', type:'Departure', image:IMAGES.airport,
+          location:'El Dorado International (BOG)',
+          notes:'Arrive 3 hours early for international. Pre-arrange airport transport for 6 the night before.',
+          who:'All 6' }
+      ]
+    }
+  ],
+  reservations: [
+    { name:'La Granja Tenjo', phone:'+57 323 292 6880', wa:'https://wa.me/573232926880', when:'Sun May 24, 10 AM arrival, lunch ~12:30 PM · party of 6', priority:1 },
+    { name:'Cumbia House', phone:'+57 601 508 8383', wa:'https://wa.me/576015088383', when:'Sat May 23, 10 PM · 4 adults · table near stage', priority:1 },
+    { name:'Andrés Carne de Res Chía', phone:'+57 601 589 3880', url:'https://andrescarnederes.com', when:'Sun May 24, 5:30 PM · party of 6', priority:1 },
+    { name:'Private driver/van Sunday', phone:'Ask Airbnb host', when:'Sun May 24, 9 AM – 10 PM · Tenjo + Chía', priority:1 },
+    { name:'Osaka Bogotá', phone:'+57 322 681 8282', url:'https://www.osakanikkei.com', when:'Sat May 23, 7 PM · party of 6', priority:2 },
+    { name:'La Brasserie', phone:'+57 313 889 4213', wa:'https://wa.me/573138894213', when:'Sat May 23, 1:30 PM · party of 6', priority:2 },
+    { name:'Cuzco (Friday)', phone:'+57 316 350 0774', wa:'https://wa.me/573163500774', when:'Fri May 22, 7:30 PM · party of 6', priority:2 },
+    { name:'Cuzco (Monday)', phone:'+57 316 350 0774', wa:'https://wa.me/573163500774', when:'Mon May 25, 12:30 PM · party of 6', priority:2 },
+    { name:'Storia D\'Amore', phone:'+57 310 762 0025', wa:'https://wa.me/573107620025', when:'Mon May 25, 7:30 PM · party of 6', priority:2 },
+    { name:'Wuin Spa Chicó', phone:'+57 311 432 5910', wa:'https://wa.me/573114325910', when:'Mon May 25, 10 AM · group block · ask kids\' policy', priority:2 },
+    { name:'Rappi app', phone:'Install before trip', url:'https://www.rappi.com.co', when:'Friday breakfast delivery + on-call all week', priority:3 },
+    { name:'Monserrate tickets', phone:'monserrate.co', url:'https://www.monserrate.co', when:'Online — buy ahead to skip lines', priority:3 },
+    { name:'Airport transport Tuesday', phone:'Ask Airbnb host', when:'Tue May 26 · van for 6', priority:3 }
+  ]
+};
+
+let activeDay = 'fri';
+let showRes = false;
+const completedRes = {};
+
+function renderDayTabs() {
+  const tabs = document.getElementById('dayTabs');
+  tabs.innerHTML = data.days.map(d => `
+    <button class="day-tab ${activeDay===d.id?'active':''}"
+      style="${activeDay===d.id?`color:${d.color};`:''}"
+      onclick="setDay('${d.id}')">
+      ${d.date.substring(0,3).toUpperCase()}
+      <span class="num">${d.dateShort}</span>
+    </button>
+  `).join('');
+}
+
+function renderDayContent() {
+  const d = data.days.find(x => x.id === activeDay);
+  const content = document.getElementById('dayContent');
+  content.style.setProperty('--day-color', d.color);
+  content.innerHTML = `
+    <div class="day-header" style="--day-color:${d.color}">
+      <div class="day-bignum">${d.dateShort}</div>
+      <div class="day-header-content">
+        <div class="day-eyebrow">${d.dateNum}</div>
+        <div class="day-title">${d.date}</div>
+        <div class="day-theme">${d.theme}</div>
+      </div>
+    </div>
+    ${d.altitude ? `
+      <div class="altitude">
+        <div class="altitude-icon">⛰</div>
+        <div>${d.altitude}</div>
+      </div>
+    ` : ''}
+    <div class="events">
+      ${d.events.map((ev) => `
+        <div class="event" style="--day-color:${d.color}">
+          <div class="event-img" style="background-image:url('${ev.image}')">
+            <div class="event-time-badge">⏱ ${ev.time}</div>
+            <div class="event-type-badge" style="color:${d.color};border-color:${d.color}50">${ev.type}</div>
+          </div>
+          <div class="event-body">
+            <div class="event-name">${ev.title}</div>
+            <div class="event-line"><span class="icon">📍</span><span>${ev.location}</span></div>
+            ${ev.phone ? `<a class="event-line event-link" style="color:${d.color}" href="tel:${ev.phone.replace(/\s/g,'')}"><span class="icon">📞</span><span>${ev.phone}</span></a>` : ''}
+            ${ev.website ? `<a class="event-line event-link" style="color:${d.color}" href="https://${ev.website}" target="_blank"><span class="icon">🌐</span><span>${ev.website}</span></a>` : ''}
+            ${ev.reservation ? `<a class="reservation-btn ${ev.reservation.type}" href="${ev.reservation.url}" target="_blank">${ev.reservation.label} <span class="arrow">→</span></a>` : ''}
+            <div class="event-notes">${ev.notes}</div>
+            <div class="event-who"><span>👥</span>${ev.who}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function setDay(id) {
+  activeDay = id;
+  renderDayTabs();
+  renderDayContent();
+  const tabs = document.querySelector('.day-tabs');
+  if (tabs) window.scrollTo({ top: tabs.offsetTop - 20, behavior: 'smooth' });
+}
+
+function toggleView() {
+  showRes = !showRes;
+  document.getElementById('itineraryView').classList.toggle('hidden', showRes);
+  document.getElementById('reservationsView').classList.toggle('hidden', !showRes);
+  const btn = document.getElementById('toggleBtn');
+  btn.classList.toggle('checklist-mode', showRes);
+  document.getElementById('toggleIcon').textContent = showRes ? '←' : '☎';
+  document.getElementById('toggleLabel').textContent = showRes ? 'Back to Itinerary' : 'Reservations Checklist';
+  if (showRes) renderReservations();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderReservations() {
+  const priorities = [
+    { p:1, label:'★ Top Priority', color:'#ff5e3a' },
+    { p:2, label:'◆ Important', color:'#fcd116' },
+    { p:3, label:'○ Nice to have', color:'#b5b1a3' }
+  ];
+  document.getElementById('resList').innerHTML = priorities.map(({p,label,color}) => `
+    <div class="priority-section">
+      <div class="priority-badge" style="color:${color}">${label}</div>
+      ${data.reservations.filter(r => r.priority === p).map((r) => {
+        const globalIdx = data.reservations.indexOf(r);
+        const isDone = !!completedRes[globalIdx];
+        return `
+          <div class="res-card ${isDone?'done':''}" onclick="toggleRes(${globalIdx})">
+            <div class="res-check">${isDone ? '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : ''}</div>
+            <div class="res-info">
+              <div class="res-name">${r.name}</div>
+              <div class="res-when">${r.when}</div>
+              <div class="res-phone" style="color:${color}">${r.phone}</div>
+              ${r.wa ? `<a class="res-link wa" href="${r.wa}" target="_blank" onclick="event.stopPropagation()">💬 WhatsApp →</a>` :
+                r.url ? `<a class="res-link web" href="${r.url}" target="_blank" onclick="event.stopPropagation()">🌐 Online →</a>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
+function toggleRes(idx) {
+  completedRes[idx] = !completedRes[idx];
+  renderReservations();
+}
+
+renderDayTabs();
+renderDayContent();
+</script>
+
+</body>
+</html>
